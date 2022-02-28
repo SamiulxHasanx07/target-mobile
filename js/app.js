@@ -3,7 +3,7 @@ const fetchData = searchText =>{
     const searchInput = document.getElementById('search-bar');
 
     // remove after details show 
-    searchInput.value = searchText;
+    // searchInput.value = searchText;
     if(searchText == ''){
         searchInput.style.border = '1px solid red';
         searchInput.placeholder = 'Enter Phone Name';  
@@ -19,18 +19,86 @@ const fetchData = searchText =>{
     }
 }
 // remove after details show 
-fetchData('apple')
+// fetchData('apple')
 
 // fetch Details
 const fetchDetail = (id) =>{
     const url = `https://openapi.programming-hero.com/api/phone/${id}`;
     fetch(url)
     .then(response => response.json())
-    .then(data => console.log(data))
+    .then(data => loadDetailsData(data.data))
     // console.log(url)
 }
-fetchDetail();
+// fetchDetail();
 
+// need to fetch array data 
+// Load Details Section Datas
+const loadDetailsData = (data) =>{
+    // console.log(data.mainFeatures.sensors)
+    const detailSection = document.getElementById('details');
+    detailSection.textContent = '';
+    const fullSpecClass = ['row','align-items-center'];
+    const fullSpec = document.createElement('div');
+    fullSpec.classList.add(...fullSpecClass);
+    fullSpec.innerHTML = `
+        <div class="col-12 col-md-12 my-5 my-lg-0 col-lg-3 tm-shadow">
+            <div class="bg-white img-wrapper d-flex align-items-center justify-content-center py-4">
+                <img src="${data.image}" alt="">
+            </div>
+        </div>
+        <div class="col-12 col-md-12 col-lg-9">
+            <h2>${data.name}</h2>
+            <div class="row">
+                <div class="col-12 col-md-6">
+                    <table class="table">
+                        <tbody>
+                            <tr>
+                                <th scope="row">Brand:</th>
+                                <td>${data.brand}</td>
+                            </tr>
+                            <tr>
+                                <th scope="row">ChipSet</th>
+                                <td>${data.mainFeatures.chipSet}</td>
+                            </tr>
+                            <tr>
+                                <th scope="row">Display Size:</th>
+                                <td>${data.mainFeatures.displaySize}</td>
+                            </tr>
+                            <tr>
+                                <th scope="row">Memory:</th>
+                                <td>${data.mainFeatures.memory}</td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+                <div class="col-12 col-md-6">
+                    <table class="table overflow="hidden">
+                        <tbody>
+                            <tr>
+                                <th scope="row">Sensors:</th>
+                                <td><p>${'this section left'}</p></td>
+                            </tr>
+                            <tr>
+                                <th scope="row">Storage:</th>
+                                <td>${data.mainFeatures.storage}</td>
+                            </tr>
+                            <tr>
+                                <th scope="row">Release Date:</th>
+                                <td>${data.releaseDate}</td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+            </div>                    
+        </div>   
+    `;
+    
+
+    detailSection.appendChild(fullSpec);
+
+    // console.log(detailSection)
+
+}
 
 
 
@@ -56,7 +124,7 @@ const displayPhone = allPhone =>{
         singlePhone.classList.add('col');
         // console.log(singleData);
         singlePhone.innerHTML = `
-        <div class="card py-lg-4 py-3 border-0 tm-shadow">
+        <div class="card py-lg-2 py-3 border-0 tm-shadow">
             <img class="img-fluid p-3 mx-auto" src="${singleData.image}" class="card-img-top" alt="">
             <div class="card-body">
                 <h5 class="card-title text-center">${singleData.phone_name}</h5>
