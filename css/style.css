@@ -7,6 +7,7 @@
 /* default color */
 .font-color{
     color:var(--main-color);
+
 }
 .bg-color{
     background-color: var(--main-color);
