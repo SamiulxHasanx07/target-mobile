@@ -1,12 +1,15 @@
 // Fetch Data from API
-const fetchData = searchPhone =>{
+const fetchData = searchText =>{
     const searchInput = document.getElementById('search-bar');
-    if(searchPhone == ''){
+    
+    // remove after details show 
+    searchInput.value = searchText;
+    if(searchText == ''){
         searchInput.style.border = '1px solid red';
         searchInput.placeholder = 'Enter Phone Name';  
     }else{
-        console.log(typeof searchPhone)
-        const url = `https://openapi.programming-hero.com/api/phones?search=${searchPhone}`;
+        // console.log(typeof searchPhone)
+        const url = `https://openapi.programming-hero.com/api/phones?search=${searchText}`;
         fetch(url)
         .then(response => response.json())
         .then(data => displayPhone(data.data))
@@ -15,10 +18,23 @@ const fetchData = searchPhone =>{
         searchInput.style.border = '';
     }
 }
+// remove after details show 
+fetchData('apple')
+
+// fetch Details
+const fetchDetail = (id) =>{
+    const url = `https://openapi.programming-hero.com/api/phone/${id}`;
+    fetch(url)
+    .then(response => response.json())
+    .then(data => console.log(data))
+    // console.log(url)
+}
+fetchDetail();
+
 
 // Show Data in UI 
 const displayPhone = allPhone =>{
-    // console.log(allPhone.length);
+    // console.log(allPhone);
     if(allPhone.length == 0){
         const searchError = document.getElementById('search-error');
         searchError.innerHTML = `
@@ -44,7 +60,7 @@ const displayPhone = allPhone =>{
                 <h5 class="card-title text-center">${singleData.phone_name}</h5>
                 <p class="card-text text-center">Brand: ${singleData.brand}</p>
                 <div class="d-flex justify-content-center">
-                    <button class="btn bg-color text-white">Show Details</button>
+                    <button onclick="fetchDetail('${singleData.slug}')" class="btn bg-color text-white">Show Details</button>
                 </div>
             </div>
         </div>
@@ -67,8 +83,7 @@ document.getElementById('search-btn').addEventListener('click', () =>{
     const searchError = document.getElementById('search-error');
     searchError.innerHTML = ``;
     // reset search bar value afeter click search
-    
-    if(searchInput.value = ''){
+    if(searchInput.value == ''){
         dataToggler('none')
 
     }else{
