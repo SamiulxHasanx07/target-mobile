@@ -8,6 +8,17 @@ const fetchData = searchPhone =>{
 
 // Show Data in UI 
 const displayPhone = allPhone =>{
+    console.log(allPhone.length);
+    if(allPhone.length == 0){
+        const searchError = document.getElementById('search-error');
+        searchError.innerHTML = `
+            <h4>Result Not Found</h4>
+        `;
+        // const notFound = document.createElement('h4');
+        // notFound.innerText = 'No Result Found';
+        // searchError.appendChild(notFound);
+    }
+    
     const displayPhone = document.getElementById('display-phone');
     displayPhone.textContent = '';
     allPhone.forEach(singleData =>{
@@ -39,6 +50,8 @@ document.getElementById('search-btn').addEventListener('click', () =>{
     fetchData(searchValue)
 
 
+    const searchError = document.getElementById('search-error');
+    searchError.innerHTML = ``;
     // reset search bar value afeter click search
     searchInput.value = '';
 })
