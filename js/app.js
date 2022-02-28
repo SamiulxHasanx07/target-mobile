@@ -1,14 +1,24 @@
 // Fetch Data from API
 const fetchData = searchPhone =>{
-    const url = `https://openapi.programming-hero.com/api/phones?search=${searchPhone}`;
-    fetch(url)
-    .then(response => response.json())
-    .then(data => displayPhone(data.data))
+    const searchInput = document.getElementById('search-bar');
+    if(searchPhone == ''){
+        searchInput.style.border = '1px solid red';
+        searchInput.placeholder = 'Enter Phone Name';
+    }else{
+        console.log(typeof searchPhone)
+        const url = `https://openapi.programming-hero.com/api/phones?search=${searchPhone}`;
+        fetch(url)
+        .then(response => response.json())
+        .then(data => displayPhone(data.data))
+
+        // reset search validation style 
+        searchInput.style.border = '';
+    }
 }
 
 // Show Data in UI 
 const displayPhone = allPhone =>{
-    console.log(allPhone.length);
+    // console.log(allPhone.length);
     if(allPhone.length == 0){
         const searchError = document.getElementById('search-error');
         searchError.innerHTML = `
