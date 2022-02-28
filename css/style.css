@@ -26,3 +26,8 @@ body{
     margin: auto;
     display: none;
 }
+
+/* Custom Shadow */
+.tm-shadow{
+    box-shadow: rgb(197 197 197 / 7%) 0px 7px 29px 0px;
+}

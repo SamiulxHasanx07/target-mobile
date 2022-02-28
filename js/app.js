@@ -1,7 +1,7 @@
 // Fetch Data from API
 const fetchData = searchText =>{
     const searchInput = document.getElementById('search-bar');
-    
+
     // remove after details show 
     searchInput.value = searchText;
     if(searchText == ''){
@@ -32,6 +32,8 @@ const fetchDetail = (id) =>{
 fetchDetail();
 
 
+
+
 // Show Data in UI 
 const displayPhone = allPhone =>{
     // console.log(allPhone);
@@ -54,7 +56,7 @@ const displayPhone = allPhone =>{
         singlePhone.classList.add('col');
         // console.log(singleData);
         singlePhone.innerHTML = `
-        <div class="card">
+        <div class="card py-lg-4 py-3 border-0 tm-shadow">
             <img class="img-fluid p-3 mx-auto" src="${singleData.image}" class="card-img-top" alt="">
             <div class="card-body">
                 <h5 class="card-title text-center">${singleData.phone_name}</h5>
