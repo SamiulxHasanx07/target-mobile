@@ -3,7 +3,7 @@ const fetchData = searchPhone =>{
     const searchInput = document.getElementById('search-bar');
     if(searchPhone == ''){
         searchInput.style.border = '1px solid red';
-        searchInput.placeholder = 'Enter Phone Name';
+        searchInput.placeholder = 'Enter Phone Name';  
     }else{
         console.log(typeof searchPhone)
         const url = `https://openapi.programming-hero.com/api/phones?search=${searchPhone}`;
@@ -24,6 +24,8 @@ const displayPhone = allPhone =>{
         searchError.innerHTML = `
             <h4>Result Not Found</h4>
         `;
+        
+        dataToggler('none')
         // const notFound = document.createElement('h4');
         // notFound.innerText = 'No Result Found';
         // searchError.appendChild(notFound);
@@ -49,6 +51,8 @@ const displayPhone = allPhone =>{
         
         `;
         displayPhone.appendChild(singlePhone);
+        
+        dataToggler('none')
     })
 }
 
@@ -63,5 +67,19 @@ document.getElementById('search-btn').addEventListener('click', () =>{
     const searchError = document.getElementById('search-error');
     searchError.innerHTML = ``;
     // reset search bar value afeter click search
+    
+    if(searchInput.value = ''){
+        dataToggler('none')
+
+    }else{
+        dataToggler('block')
+
+    }
     searchInput.value = '';
 })
+
+
+const dataToggler = displayProperty =>{
+    const spinner = document.getElementById('spinner');
+    spinner.style.display =displayProperty;
+}
