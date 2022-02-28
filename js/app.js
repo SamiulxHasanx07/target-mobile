@@ -1,18 +1,15 @@
-
-
-const fetchData = phoneName =>{
-    const url = `https://openapi.programming-hero.com/api/phones?`;
+// Fetch Data from API
+const fetchData = searchPhone =>{
+    const url = `https://openapi.programming-hero.com/api/phones?search=${searchPhone}`;
     fetch(url)
     .then(response => response.json())
     .then(data => displayPhone(data.data))
 }
 
-fetchData('Data')
-
-
+// Show Data in UI 
 const displayPhone = allPhone =>{
-
     const displayPhone = document.getElementById('display-phone');
+    displayPhone.textContent = '';
     allPhone.forEach(singleData =>{
         const singlePhone = document.createElement('div');
         singlePhone.classList.add('col');
@@ -32,7 +29,16 @@ const displayPhone = allPhone =>{
         `;
         displayPhone.appendChild(singlePhone);
     })
-
-
-
 }
+
+
+// Search Button
+document.getElementById('search-btn').addEventListener('click', () =>{
+    const searchInput = document.getElementById('search-bar');
+    const searchValue = searchInput.value;
+    fetchData(searchValue)
+
+
+    // reset search bar value afeter click search
+    searchInput.value = '';
+})
