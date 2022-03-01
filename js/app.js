@@ -20,7 +20,6 @@ const fetchData = searchText =>{
         displayPhone.textContent = '';
         
     }else{
-        // console.log(typeof searchPhone)
         const url = `https://openapi.programming-hero.com/api/phones?search=${searchText}`;
         fetch(url)
         .then(response => response.json())
@@ -84,7 +83,7 @@ const loadDetailsData = (data) =>{
                     <table class="table">
                         <tbody>                       
                             <tr>
-                                <th scope="row">ChipSet</th>
+                                <th scope="row">Chip Set:</th>
                                 <td>${data.mainFeatures.chipSet}</td>
                             </tr>
                             <tr>
@@ -100,7 +99,7 @@ const loadDetailsData = (data) =>{
                                 <td><p>${allSensor}</p></td>
                             </tr>
                             <tr>
-                                <th scope="row">Storage: </th>
+                                <th scope="row">Storage:</th>
                                 <td>${data.mainFeatures.storage}</td>
                             </tr>
                         </tbody>
@@ -142,7 +141,6 @@ const loadDetailsData = (data) =>{
    
 
     detailSection.appendChild(fullSpec);
-    // console.log(detailSection)
 }
 
 // Show Data in UI 
@@ -163,7 +161,6 @@ const displayPhone = allPhone =>{
     allPhone.forEach(singleData =>{
         const singlePhone = document.createElement('div');
         singlePhone.classList.add('col');
-        // console.log(singleData);
         singlePhone.innerHTML = `
         <div class="card py-lg-2 py-2 border-0 tm-shadow">
             <img class="img-fluid p-3 mx-auto" src="${singleData.image}" class="card-img-top" alt="">
@@ -210,7 +207,6 @@ document.getElementById('search-btn').addEventListener('click', () =>{
 
     }
     searcResult[0] = (searchLowerCase);
-    console.log(typeof searchLowerCase);
     searchInput.value = '';
 
     // Details Datas reset
@@ -232,7 +228,6 @@ const phonsesData = (data) =>{
     data.forEach(singleData =>{
         const singlePhone = document.createElement('div');
         singlePhone.classList.add('col');
-        // console.log(singleData);
         singlePhone.innerHTML = `
         <div class="card py-lg-2 py-3 border-0 tm-shadow">
             <img class="img-fluid p-3 mx-auto" src="${singleData.image}" class="card-img-top" alt="">
@@ -271,7 +266,6 @@ const loadButtonVisiblity = (visibleity) => {
 // load more button Event Handler
 document.getElementById('load-more-Data').addEventListener('click',() =>{
     const lastSearch = searcResult[0];
-    console.log(lastSearch)
     fetchAllSearch(lastSearch);
 });
 
