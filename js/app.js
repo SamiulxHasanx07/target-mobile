@@ -8,12 +8,17 @@ const fetchData = searchText =>{
         searchInput.style.border = '1px solid red';
         searchInput.placeholder = 'Enter Phone Name';  
         searchInput.classList.add('plh-color');
+
+        // search field empty
+        const displayPhone = document.getElementById('display-phone');
+        displayPhone.textContent = '';
+        
     }else{
         // console.log(typeof searchPhone)
         const url = `https://openapi.programming-hero.com/api/phones?search=${searchText}`;
         fetch(url)
         .then(response => response.json())
-        .then(data => displayPhone(data.data))
+        .then(data => displayPhone(data.data.slice(0,20)))
 
         // reset search validation style 
         searchInput.style.border = '';
@@ -154,7 +159,15 @@ const loadDetailsData = (data) =>{
 
 // Show Data in UI 
 const displayPhone = allPhone =>{
-    // console.log(allPhone);
+    // console.log(allPhone.length);
+
+    // default Data Load
+    // const mxData = 20;
+    // const allPhoneData = allPhone;
+    
+    // console.log(allPhoneData)
+
+
     if(allPhone.length == 0){
         const searchError = document.getElementById('search-error');
         searchError.innerHTML = `
@@ -163,6 +176,10 @@ const displayPhone = allPhone =>{
         `;
         
         dataToggler('none')
+
+        // remove Load More Data
+        const loadMore  = document.getElementById('load-more-Data');
+        loadMore.style.display = 'none';
         // const notFound = document.createElement('h4');
         // notFound.innerText = 'No Result Found';
         // searchError.appendChild(notFound);
@@ -190,6 +207,9 @@ const displayPhone = allPhone =>{
         displayPhone.appendChild(singlePhone);
         
         dataToggler('none')
+        // load more data        
+        const loadMore  = document.getElementById('load-more-Data');
+        loadMore.style.display = 'block';
     })
 }
 
@@ -218,6 +238,13 @@ document.getElementById('search-btn').addEventListener('click', () =>{
     // Details Datas reset
     const detailSection = document.getElementById('details');
     detailSection.textContent = '';
+
+
+
+    // Load Data Button
+    const loadMore  = document.getElementById('load-more-Data');
+    // loadMore.style.display= 'block';
+    console.log(loadMore);
 })
 
 
