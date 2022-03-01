@@ -9,10 +9,13 @@
     color:var(--main-color);
 
 }
-.bg-color{
+.tm-bg{
     background-color: var(--main-color);
 }
-
+/* Custom Shadow */
+.tm-shadow{
+    box-shadow: rgb(197 197 197 / 7%) 0px 7px 29px 0px;
+}
 body{
     font-family: 'Poppins', sans-serif;
 }
@@ -25,11 +28,6 @@ body{
     bottom: 0;
     margin: auto;
     display: none;
-}
-
-/* Custom Shadow */
-.tm-shadow{
-    box-shadow: rgb(197 197 197 / 7%) 0px 7px 29px 0px;
 }
 
 #display-phone{

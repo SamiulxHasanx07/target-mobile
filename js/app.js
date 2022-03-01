@@ -136,6 +136,8 @@ const loadDetailsData = (data) =>{
             </div>                    
         </div>   
     `;
+    // reset scroll after data load
+    window.scrollTo(0, 0);
     // console.log(data.others)
     // const specData = data?.others;
    
@@ -176,7 +178,7 @@ const displayPhone = allPhone =>{
                 <h5 class="card-title text-center">${singleData.phone_name}</h5>
                 <p class="card-text text-center">Brand: ${singleData.brand}</p>
                 <div class="d-flex justify-content-center">
-                    <button onclick="fetchDetail('${singleData.slug}')" class="btn bg-color text-white">Show Details</button>
+                    <button onclick="fetchDetail('${singleData.slug}')" class="btn tm-bg text-white">Show Details</button>
                 </div>
             </div>
         </div>
