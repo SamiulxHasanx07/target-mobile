@@ -19,7 +19,7 @@ const fetchData = searchText =>{
     }
 }
 // remove after details show 
-// fetchData('apple')
+fetchData('samsung')
 
 // fetch Details
 const fetchDetail = (id) =>{
@@ -34,7 +34,18 @@ const fetchDetail = (id) =>{
 // need to fetch array data 
 // Load Details Section Datas
 const loadDetailsData = (data) =>{
-    // console.log(data.mainFeatures.sensors)
+    // console.log(data)
+
+    // Others Section Data Validation Checker
+    const validChecker = (othersData)=>{
+        if(othersData == undefined){
+            return "Data Not Available";
+        }else{
+            return othersData;
+        }
+    }
+
+    // Details Datas
     const detailSection = document.getElementById('details');
     detailSection.textContent = '';
     const fullSpecClass = ['row','align-items-center'];
@@ -47,7 +58,7 @@ const loadDetailsData = (data) =>{
             </div>
         </div>
         <div class="col-12 col-md-12 col-lg-9">
-            <h2>${data.name}</h2>
+            <h2 class="my-2">${data.name}</h2>
             <div class="row">
                 <div class="col-12 col-md-6">
                     <table class="table">
@@ -56,6 +67,11 @@ const loadDetailsData = (data) =>{
                                 <th scope="row">Brand:</th>
                                 <td>${data.brand}</td>
                             </tr>
+                        </tbody>
+                    </table>
+                    <h4 class="text-center">Main Features</h4>
+                    <table class="table">
+                        <tbody>                       
                             <tr>
                                 <th scope="row">ChipSet</th>
                                 <td>${data.mainFeatures.chipSet}</td>
@@ -68,12 +84,6 @@ const loadDetailsData = (data) =>{
                                 <th scope="row">Memory:</th>
                                 <td>${data.mainFeatures.memory}</td>
                             </tr>
-                        </tbody>
-                    </table>
-                </div>
-                <div class="col-12 col-md-6">
-                    <table class="table overflow="hidden">
-                        <tbody>
                             <tr>
                                 <th scope="row">Sensors:</th>
                                 <td><p>${'this section left'}</p></td>
@@ -82,23 +92,59 @@ const loadDetailsData = (data) =>{
                                 <th scope="row">Storage:</th>
                                 <td>${data.mainFeatures.storage}</td>
                             </tr>
-                            <tr>
-                                <th scope="row">Release Date:</th>
-                                <td>${data.releaseDate}</td>
-                            </tr>
                         </tbody>
+                    </table>
+                </div>
+                <div class="col-12 col-md-6">
+                    <table class="table overflow="hidden">
+                        <tbody>
+                        <tr>
+                            <th scope="row">Release Date:</th>
+                            <td>${data.releaseDate}</td>
+                        </tr>
+                        </tbody>
+                    </table>
+                    <h4 class="text-center">Others Features</h4>
+                    <table class="table">
+                        <tbody>                       
+                            <tr>
+                                <th scope="row">Bluetooth: </th>
+                                <td>${validChecker(data?.others?.Bluetooth)}</td>
+                            </tr>                     
+                            <tr>
+                                <th scope="row">GPS: </th>
+                                <td>${validChecker(data?.others?.GPS)}</td>
+                            </tr>                     
+                            <tr>
+                                <th scope="row">NFC: </th>
+                                <td>${validChecker(data?.others?.NFC)}</td>
+                            </tr>                     
+                            <tr>
+                                <th scope="row">Radio: </th>
+                                <td>${validChecker(data?.others?.Radio)}</td>
+                            </tr>
+                            <tr>
+                                <th scope="row">USB: </th>
+                                <td>${validChecker(data?.others?.USB)}</td>
+                            </tr>
+                            <tr>
+                                <th scope="row">WLAN: </th>
+                                <td>${validChecker(data?.others?.WLAN)}</td>
+                            </tr>
                     </table>
                 </div>
             </div>                    
         </div>   
     `;
-    
+    // console.log(data.others)
+    // const specData = data?.others;
+   
 
     detailSection.appendChild(fullSpec);
 
     // console.log(detailSection)
-
 }
+
 
 
 
@@ -161,6 +207,12 @@ document.getElementById('search-btn').addEventListener('click', () =>{
 
     }
     searchInput.value = '';
+
+
+    
+    // Details Datas reset
+    const detailSection = document.getElementById('details');
+    detailSection.textContent = '';
 })
 
 
