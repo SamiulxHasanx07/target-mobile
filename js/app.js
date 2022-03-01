@@ -19,7 +19,7 @@ const fetchData = searchText =>{
     }
 }
 // remove after details show 
-fetchData('samsung')
+fetchData('apple')
 
 // fetch Details
 const fetchDetail = (id) =>{
@@ -36,9 +36,9 @@ const fetchDetail = (id) =>{
 const loadDetailsData = (data) =>{
     // console.log(data)
 
-    // Others Section Data Validation Checker
+    // Details Data Validation
     const validChecker = (othersData)=>{
-        if(othersData == undefined){
+        if(othersData == undefined || othersData.length == 0){
             return "Data Not Available";
         }else{
             return othersData;
@@ -100,7 +100,7 @@ const loadDetailsData = (data) =>{
                         <tbody>
                         <tr>
                             <th scope="row">Release Date:</th>
-                            <td>${data.releaseDate}</td>
+                            <td>${validChecker(data.releaseDate)}</td>
                         </tr>
                         </tbody>
                     </table>
