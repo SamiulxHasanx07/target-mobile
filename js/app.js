@@ -1,4 +1,4 @@
-// Fetch Data from API
+// Fetch 20 Data from API
 const fetchData = searchText =>{
     const searchInput = document.getElementById('search-bar');
 
@@ -8,6 +8,10 @@ const fetchData = searchText =>{
         searchInput.style.border = '1px solid red';
         searchInput.placeholder = 'Enter Phone Name';  
         searchInput.classList.add('plh-color');
+
+        // const loadMore  = document.getElementById('load-more-Data');
+        // loadMore.style.display= 'none';
+        loadButtonVisiblity('invisible');
 
         // search field empty
         const displayPhone = document.getElementById('display-phone');
@@ -36,8 +40,9 @@ const fetchDetail = (id) =>{
     .then(data => loadDetailsData(data.data))
     // console.log(url)
 }
-// fetchDetail();
 
+
+// fetchDetail();
 // need to fetch array data 
 // Load Details Section Datas
 const loadDetailsData = (data) =>{
@@ -155,8 +160,6 @@ const loadDetailsData = (data) =>{
 }
 
 
-
-
 // Show Data in UI 
 const displayPhone = allPhone =>{
     // console.log(allPhone.length);
@@ -175,14 +178,8 @@ const displayPhone = allPhone =>{
             <p>Search Again</p>
         `;
         
-        dataToggler('none')
-
-        // remove Load More Data
-        const loadMore  = document.getElementById('load-more-Data');
-        loadMore.style.display = 'none';
-        // const notFound = document.createElement('h4');
-        // notFound.innerText = 'No Result Found';
-        // searchError.appendChild(notFound);
+        dataToggler('none');
+        loadButtonVisiblity('invisible');
     }
     
     const displayPhone = document.getElementById('display-phone');
@@ -207,18 +204,18 @@ const displayPhone = allPhone =>{
         displayPhone.appendChild(singlePhone);
         
         dataToggler('none')
-        // load more data        
-        const loadMore  = document.getElementById('load-more-Data');
-        loadMore.style.display = 'block';
     })
 }
-
 
 // Search Button
 document.getElementById('search-btn').addEventListener('click', () =>{
     const searchInput = document.getElementById('search-bar');
     const searchValue = searchInput.value;
-    fetchData(searchValue)
+    const searchLowerCase = searchValue.toLowerCase()
+    fetchData(searchLowerCase);
+    // console.log(storeValue)
+    // console.log(searchValue)
+    // fetchAllSearch(searchValue);
 
 
     const searchError = document.getElementById('search-error');
@@ -226,12 +223,15 @@ document.getElementById('search-btn').addEventListener('click', () =>{
     // reset search bar value afeter click search
     if(searchInput.value == ''){
         dataToggler('none')
+        loadButtonVisiblity('invisible');
 
     }else{
         dataToggler('block')
+        // Load Data Button
+        loadButtonVisiblity('visible');
 
     }
-    searchInput.value = '';
+    // searchInput.value = '';
 
 
     
@@ -241,13 +241,70 @@ document.getElementById('search-btn').addEventListener('click', () =>{
 
 
 
-    // Load Data Button
-    const loadMore  = document.getElementById('load-more-Data');
-    // loadMore.style.display= 'block';
-    console.log(loadMore);
 })
 
+const getValue = () =>{
+    const searchInput = document.getElementById('search-bar');
+    const value = searchInput.value;
+    return value;
+}
 
+// Fetch All Data from API
+const fetchAllSearch = searchText => {
+    const url = `https://openapi.programming-hero.com/api/phones?search=${searchText}`;
+    fetch(url)
+    .then(response => response.json())
+    .then(data => phonsesData(data.data))
+}
+
+const phonsesData = (data) =>{
+    
+    const displayPhone = document.getElementById('display-phone');
+    displayPhone.textContent = '';
+    data.forEach(singleData =>{
+        const singlePhone = document.createElement('div');
+        singlePhone.classList.add('col');
+        // console.log(singleData);
+        singlePhone.innerHTML = `
+        <div class="card py-lg-2 py-3 border-0 tm-shadow">
+            <img class="img-fluid p-3 mx-auto" src="${singleData.image}" class="card-img-top" alt="">
+            <div class="card-body">
+                <h5 class="card-title text-center">${singleData.phone_name}</h5>
+                <p class="card-text text-center">Brand: ${singleData.brand}</p>
+                <div class="d-flex justify-content-center">
+                    <a href="#details" onclick="fetchDetail('${singleData.slug}')" class="btn tm-bg text-white">Show Details</a>
+                </div>
+            </div>
+        </div>
+        
+        `;
+        displayPhone.appendChild(singlePhone);
+        
+        dataToggler('none')
+    })
+    loadButtonVisiblity('invisible')
+
+    const searchInput = document.getElementById('search-bar');
+    searchInput.value = '';
+}
+
+// Load More Button Visiblity
+const loadButtonVisiblity = (visibleity) => {
+    if(visibleity == 'visible'){
+        const loadMore  = document.getElementById('load-more-Data');
+        loadMore.style.display= 'block';
+    }else if(visibleity == 'invisible'){
+        const loadMore  = document.getElementById('load-more-Data');
+        loadMore.style.display= 'none';
+    }
+}
+// load more button Event Handler
+document.getElementById('load-more-Data').addEventListener('click',() =>{
+    const getedValue = getValue();
+    fetchAllSearch(getedValue);
+})
+
+// Spinner Data Loading
 const dataToggler = displayProperty =>{
     const spinner = document.getElementById('spinner');
     spinner.style.display =displayProperty;
