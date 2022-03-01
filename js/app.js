@@ -1,6 +1,12 @@
+// get search bar 
+const searchBar = () =>{
+    const input = document.getElementById('search-bar');
+    return input;
+}
+
 // Fetch 20 Data from API
 const fetchData = searchText =>{
-    const searchInput = document.getElementById('search-bar');
+    const searchInput = searchBar();
 
     // remove after details show 
     // searchInput.value = searchText;
@@ -178,8 +184,8 @@ const displayPhone = allPhone =>{
             <p>Search Again</p>
         `;
         
-        dataToggler('none');
         loadButtonVisiblity('invisible');
+        dataToggler('none');
     }
     
     const displayPhone = document.getElementById('display-phone');
@@ -207,9 +213,11 @@ const displayPhone = allPhone =>{
     })
 }
 
+// Store Search Data
+let searcResult = [''];
 // Search Button
 document.getElementById('search-btn').addEventListener('click', () =>{
-    const searchInput = document.getElementById('search-bar');
+    const searchInput = searchBar();
     const searchValue = searchInput.value;
     const searchLowerCase = searchValue.toLowerCase()
     fetchData(searchLowerCase);
@@ -231,7 +239,9 @@ document.getElementById('search-btn').addEventListener('click', () =>{
         loadButtonVisiblity('visible');
 
     }
-    // searchInput.value = '';
+    searcResult[0] = (searchLowerCase);
+    console.log(typeof searchLowerCase);
+    searchInput.value = '';
 
 
     
@@ -243,11 +253,6 @@ document.getElementById('search-btn').addEventListener('click', () =>{
 
 })
 
-const getValue = () =>{
-    const searchInput = document.getElementById('search-bar');
-    const value = searchInput.value;
-    return value;
-}
 
 // Fetch All Data from API
 const fetchAllSearch = searchText => {
@@ -284,7 +289,7 @@ const phonsesData = (data) =>{
     })
     loadButtonVisiblity('invisible')
 
-    const searchInput = document.getElementById('search-bar');
+    const searchInput = searchBar();
     searchInput.value = '';
 }
 
@@ -300,8 +305,9 @@ const loadButtonVisiblity = (visibleity) => {
 }
 // load more button Event Handler
 document.getElementById('load-more-Data').addEventListener('click',() =>{
-    const getedValue = getValue();
-    fetchAllSearch(getedValue);
+    const lastSearch = searcResult[0];
+    console.log(lastSearch)
+    fetchAllSearch(lastSearch);
 })
 
 // Spinner Data Loading
