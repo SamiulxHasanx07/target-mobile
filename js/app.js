@@ -7,16 +7,12 @@ const searchBar = () =>{
 // Fetch 20 Data from API
 const fetchData = searchText =>{
     const searchInput = searchBar();
-
-    // remove after details show 
-    // searchInput.value = searchText;
     if(searchText == ''){
         searchInput.style.border = '1px solid red';
         searchInput.placeholder = 'Enter Phone Name';  
         searchInput.classList.add('plh-color');
 
-        // const loadMore  = document.getElementById('load-more-Data');
-        // loadMore.style.display= 'none';
+        // load Button Visiblity
         loadButtonVisiblity('invisible');
 
         // search field empty
@@ -35,8 +31,6 @@ const fetchData = searchText =>{
         searchInput.classList.remove('plh-color');
     }
 }
-// remove after details show 
-// fetchData('apple')
 
 // fetch Details
 const fetchDetail = (id) =>{
@@ -44,16 +38,9 @@ const fetchDetail = (id) =>{
     fetch(url)
     .then(response => response.json())
     .then(data => loadDetailsData(data.data))
-    // console.log(url)
 }
 
-
-// fetchDetail();
-// need to fetch array data 
-// Load Details Section Datas
 const loadDetailsData = (data) =>{
-    // console.log(data)
-
     // Sensors Data Load
     const sensorArray = data.mainFeatures.sensors;
     const allSensor = sensorArray.join(', ');
@@ -69,6 +56,7 @@ const loadDetailsData = (data) =>{
 
     // Details Datas
     const detailSection = document.getElementById('details');
+    detailSection.classList.add('mt-5');
     detailSection.textContent = '';
     const fullSpecClass = ['row','align-items-center'];
     const fullSpec = document.createElement('div');
@@ -80,7 +68,8 @@ const loadDetailsData = (data) =>{
             </div>
         </div>
         <div class="col-12 col-md-12 col-lg-9">
-            <h2 class="my-2">${data.name}</h2>
+            <h2 class="">${data.name}</h2>
+            <p class="mb-2">${validChecker(data.releaseDate)}</p>
             <div class="row">
                 <div class="col-12 col-md-6">
                     <table class="table">
@@ -111,7 +100,7 @@ const loadDetailsData = (data) =>{
                                 <td><p>${allSensor}</p></td>
                             </tr>
                             <tr>
-                                <th scope="row">Storage:</th>
+                                <th scope="row">Storage: </th>
                                 <td>${data.mainFeatures.storage}</td>
                             </tr>
                         </tbody>
@@ -146,15 +135,6 @@ const loadDetailsData = (data) =>{
                                 <td>${validChecker(data?.others?.WLAN)}</td>
                             </tr>
                     </table>
-                    <h4 class="tm-color">More Info:</h4>
-                    <table class="table>
-                        <tbody>
-                        <tr>
-                            <th scope="row">Release Date:</th>
-                            <td>${validChecker(data.releaseDate)}</td>
-                        </tr>
-                        </tbody>
-                    </table>
                 </div>
             </div>                    
         </div>   
@@ -165,25 +145,15 @@ const loadDetailsData = (data) =>{
     // console.log(detailSection)
 }
 
-
 // Show Data in UI 
 const displayPhone = allPhone =>{
-    // console.log(allPhone.length);
-
-    // default Data Load
-    // const mxData = 20;
-    // const allPhoneData = allPhone;
-    
-    // console.log(allPhoneData)
-
-
     if(allPhone.length == 0){
         const searchError = document.getElementById('search-error');
+        searchError.classList.add('my-5');
         searchError.innerHTML = `
             <h4>Result Not Found</h4>
             <p>Search Again</p>
         `;
-        
         loadButtonVisiblity('invisible');
         dataToggler('none');
     }
@@ -195,7 +165,7 @@ const displayPhone = allPhone =>{
         singlePhone.classList.add('col');
         // console.log(singleData);
         singlePhone.innerHTML = `
-        <div class="card py-lg-2 py-3 border-0 tm-shadow">
+        <div class="card py-lg-2 py-2 border-0 tm-shadow">
             <img class="img-fluid p-3 mx-auto" src="${singleData.image}" class="card-img-top" alt="">
             <div class="card-body">
                 <h5 class="card-title text-center">${singleData.phone_name}</h5>
@@ -205,28 +175,28 @@ const displayPhone = allPhone =>{
                 </div>
             </div>
         </div>
-        
         `;
         displayPhone.appendChild(singlePhone);
-        
-        dataToggler('none')
+
+        // data loading toggler
+        dataToggler('none');
     })
 }
 
 // Store Search Data
 let searcResult = [''];
+
 // Search Button
 document.getElementById('search-btn').addEventListener('click', () =>{
     const searchInput = searchBar();
     const searchValue = searchInput.value;
-    const searchLowerCase = searchValue.toLowerCase()
-    fetchData(searchLowerCase);
-    // console.log(storeValue)
-    // console.log(searchValue)
-    // fetchAllSearch(searchValue);
 
+    // search data loawer case
+    const searchLowerCase = searchValue.toLowerCase();
+    fetchData(searchLowerCase);
 
     const searchError = document.getElementById('search-error');
+    searchError.classList.remove('my-5')
     searchError.innerHTML = ``;
     // reset search bar value afeter click search
     if(searchInput.value == ''){
@@ -243,16 +213,10 @@ document.getElementById('search-btn').addEventListener('click', () =>{
     console.log(typeof searchLowerCase);
     searchInput.value = '';
 
-
-    
     // Details Datas reset
     const detailSection = document.getElementById('details');
     detailSection.textContent = '';
-
-
-
-})
-
+});
 
 // Fetch All Data from API
 const fetchAllSearch = searchText => {
@@ -263,7 +227,6 @@ const fetchAllSearch = searchText => {
 }
 
 const phonsesData = (data) =>{
-    
     const displayPhone = document.getElementById('display-phone');
     displayPhone.textContent = '';
     data.forEach(singleData =>{
@@ -284,14 +247,15 @@ const phonsesData = (data) =>{
         
         `;
         displayPhone.appendChild(singlePhone);
-        
+        // Data loading toggler
         dataToggler('none')
-    })
+    });
     loadButtonVisiblity('invisible')
 
+    // Search Bar value reset
     const searchInput = searchBar();
     searchInput.value = '';
-}
+};
 
 // Load More Button Visiblity
 const loadButtonVisiblity = (visibleity) => {
@@ -302,16 +266,17 @@ const loadButtonVisiblity = (visibleity) => {
         const loadMore  = document.getElementById('load-more-Data');
         loadMore.style.display= 'none';
     }
-}
+};
+
 // load more button Event Handler
 document.getElementById('load-more-Data').addEventListener('click',() =>{
     const lastSearch = searcResult[0];
     console.log(lastSearch)
     fetchAllSearch(lastSearch);
-})
+});
 
 // Spinner Data Loading
 const dataToggler = displayProperty =>{
     const spinner = document.getElementById('spinner');
     spinner.style.display =displayProperty;
-}
+};

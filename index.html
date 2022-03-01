@@ -14,6 +14,7 @@
     <link rel="stylesheet" href="css/style.css">
 </head>
 <body class="bg-light">
+  <!-- Header Section -->
     <header>
         <section class="brand-name tm-bg mb-5">
             <div class="container">
@@ -26,13 +27,13 @@
                       <div class="collapse navbar-collapse" id="navbarNav">
                         <ul class="navbar-nav ms-auto">
                           <li class="nav-item">
-                            <a class="nav-link active text-white" aria-current="page" href="index.html">Home</a>
+                            <a class="nav-link active text-white" aria-current="page" href="#">Stores</a>
                           </li>
                           <li class="nav-item">
-                            <a class="nav-link text-white" aria-current="page" href="#">About US</a>
+                            <a class="nav-link text-white" aria-current="page" href="#">Order Now</a>
                           </li>
                           <li class="nav-item">
-                            <a class="nav-link text-white" aria-current="page" href="#">Contacts</a>
+                            <a class="nav-link text-white" aria-current="page" href="#">Stay Update</a>
                           </li>
                         </ul>
                       </div>
@@ -43,102 +44,38 @@
 
         <!-- search section -->
         <section class="search-section container">
-            <div class="input-group w-100 w-md-75 mx-auto">               
-                <input id="search-bar" class="py-2 px-2 py-md-3 px-md-4 form-control" type="text" placeholder="Search Phone">
+            <div class="input-group w-75 mx-auto">               
+                <input id="search-bar" class="py-2 px-2 py-md-2 px-md-4 form-control" type="text" placeholder="Search Phone">
                 <button id="search-btn" class="py-2 px-2 py-md-3 px-md-4 btn tm-bg text-white"><i class="bi bi-search"></i> Search</button>
             </div>
         </section>
     </header>
+
+    <!-- main section -->
     <main>
         <!-- Search result error msg section -->
-        <section id="search-error" class="text-center my-5">
+        <section id="search-error" class="text-center">
         </section>
-
 
         <!-- Data Loading Spinner -->
         <section id="spinner" class="spinner-border" role="status">
             <span class="visually-hidden">Loading...</span>
         </section>
-        
 
         <section id="details" class=" mx-auto container py-2 py-md-3">
-            <!-- <div class="row align-items-center">
-                <div class="col-12 col-md-12 my-5 my-lg-0 col-lg-4 tm-shadow">
-                    <div class="bg-white img-wrapper d-flex align-items-center justify-content-center py-4">
-                        <img src="https://fdn2.gsmarena.com/vv/bigpic/apple-iphone-13-mini.jpg" alt="">
-                    </div>
-                </div>
-                <div class="col-12 col-md-12 col-lg-8">
-                    <h2>Name: iPhone 13 mini</h2>
-                    <div class="row">
-                        <div class="col-12 col-md-6">
-                            <table class="table">
-                                <tbody>
-                                  <tr>
-                                    <th scope="row">Brand:</th>
-                                    <td>mobile info data</td>
-                                  </tr>
-                                  <tr>
-                                    <th scope="row">Phone Data:</th>
-                                    <td>mobile info data</td>
-                                  </tr>
-                                  <tr>
-                                    <th scope="row">Phone Data:</th>
-                                    <td>mobile info data</td>
-                                  </tr>
-                                  <tr>
-                                    <th scope="row">Phone Data:</th>
-                                    <td>mobile info data</td>
-                                  </tr>
-                                  <tr>
-                                    <th scope="row">Phone Data:</th>
-                                    <td>mobile info data</td>
-                                  </tr>
-                                </tbody>
-                              </table>
-                        </div>
-                        <div class="col-12 col-md-6">
-                            <table class="table">
-                                <tbody>
-                                  <tr>
-                                    <th scope="row">Phone Data:</th>
-                                    <td>Mark</td>
-                                  </tr>
-                                  <tr>
-                                    <th scope="row">Phone Data:</th>
-                                    <td>Jacob</td>
-                                  </tr>
-                                  <tr>
-                                    <th scope="row">Phone Data:</th>
-                                    <td>Jacob</td>
-                                  </tr>
-                                  <tr>
-                                    <th scope="row">Phone Data:</th>
-                                    <td>Jacob</td>
-                                  </tr>
-                                  <tr>
-                                    <th scope="row">Phone Data:</th>
-                                    <td>Jacob</td>
-                                  </tr>
-                                </tbody>
-                              </table>
-                        </div>
-                    </div>                    
-
-                </div>
-            </div> -->
-
         </section>
 
         <!-- Search Result Section -->
-        <div class="container pt-5">
-            <div id="display-phone" class="row row-cols-1 row-cols-md-3 g-3 g-lg-4">
+        <div class="container pt-2 pt-md-5">
+            <div id="display-phone" class="row row-cols-1 row-cols-md-3 g-3 g-lg-4 px-3 px-md-0">
             </div>
             <div class="d-flex justify-content-center py-5">
-              <button onclicke="allData()" id="load-more-Data" class="tm-bg btn text-white">Load More Data</button>
+              <button id="load-more-Data" class="tm-bg btn text-white">Load More Data</button>
             </div>
         </div>
     </main> 
+
+
     <!-- Bootstrap JS CDN -->
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/js/bootstrap.bundle.min.js" integrity="sha384-ka7Sk0Gln4gmtz2MlQnikT1wXgYsOg+OMhuP+IlRH9sENBO0LRn5q+8nbTov4+1p" crossorigin="anonymous"></script>
     <!-- Target Mobile JS -->
