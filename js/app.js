@@ -36,7 +36,7 @@ const fetchDetail = (id) =>{
 // need to fetch array data 
 // Load Details Section Datas
 const loadDetailsData = (data) =>{
-    console.log(data)
+    // console.log(data)
 
     // Sensors Data Load
     const sensorArray = data.mainFeatures.sensors;
@@ -58,7 +58,7 @@ const loadDetailsData = (data) =>{
     const fullSpec = document.createElement('div');
     fullSpec.classList.add(...fullSpecClass);
     fullSpec.innerHTML = `
-        <div class="col-12 col-md-12 my-5 my-lg-0 col-lg-3 tm-shadow">
+        <div class="col-12 col-md-12 my-4 my-lg-0 col-lg-3 tm-shadow">
             <div class="bg-white img-wrapper d-flex align-items-center justify-content-center py-4">
                 <img src="${data.image}" alt="">
             </div>
