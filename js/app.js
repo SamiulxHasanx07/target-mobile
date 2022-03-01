@@ -19,7 +19,7 @@ const fetchData = searchText =>{
     }
 }
 // remove after details show 
-fetchData('apple')
+// fetchData('apple')
 
 // fetch Details
 const fetchDetail = (id) =>{
@@ -35,6 +35,10 @@ const fetchDetail = (id) =>{
 // Load Details Section Datas
 const loadDetailsData = (data) =>{
     // console.log(data)
+
+    // Sensors Data Load
+    const sensorArray = data.mainFeatures.sensors;
+    const allSensor = sensorArray.join(', ');
 
     // Details Data Validation
     const validChecker = (othersData)=>{
@@ -86,7 +90,7 @@ const loadDetailsData = (data) =>{
                             </tr>
                             <tr>
                                 <th scope="row">Sensors:</th>
-                                <td><p>${'this section left'}</p></td>
+                                <td><p>${allSensor}</p></td>
                             </tr>
                             <tr>
                                 <th scope="row">Storage:</th>
@@ -137,7 +141,8 @@ const loadDetailsData = (data) =>{
         </div>   
     `;
     // reset scroll after data load
-    window.scrollTo(0, 0);
+    // need fix
+    // window.scrollTo(0, 0);
     // console.log(data.others)
     // const specData = data?.others;
    
