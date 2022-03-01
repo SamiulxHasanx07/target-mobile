@@ -5,7 +5,7 @@
     --main-color:#1FAA59;
 }
 /* default color */
-.font-color{
+.tm-color{
     color:var(--main-color);
 
 }
@@ -19,7 +19,13 @@
 body{
     font-family: 'Poppins', sans-serif;
 }
+#search-bar{
+    border:1px solid var(--main-color);
+}
 
+.plh-color::placeholder{
+    color: red;
+}
 #spinner{
     position: absolute;
     left:0;

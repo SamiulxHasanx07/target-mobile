@@ -7,6 +7,7 @@ const fetchData = searchText =>{
     if(searchText == ''){
         searchInput.style.border = '1px solid red';
         searchInput.placeholder = 'Enter Phone Name';  
+        searchInput.classList.add('plh-color');
     }else{
         // console.log(typeof searchPhone)
         const url = `https://openapi.programming-hero.com/api/phones?search=${searchText}`;
@@ -16,6 +17,7 @@ const fetchData = searchText =>{
 
         // reset search validation style 
         searchInput.style.border = '';
+        searchInput.classList.remove('plh-color');
     }
 }
 // remove after details show 
@@ -34,7 +36,7 @@ const fetchDetail = (id) =>{
 // need to fetch array data 
 // Load Details Section Datas
 const loadDetailsData = (data) =>{
-    // console.log(data)
+    console.log(data)
 
     // Sensors Data Load
     const sensorArray = data.mainFeatures.sensors;
@@ -73,7 +75,7 @@ const loadDetailsData = (data) =>{
                             </tr>
                         </tbody>
                     </table>
-                    <h4 class="text-center">Main Features</h4>
+                    <h4 class="tm-color">Main Features</h4>
                     <table class="table">
                         <tbody>                       
                             <tr>
@@ -100,15 +102,7 @@ const loadDetailsData = (data) =>{
                     </table>
                 </div>
                 <div class="col-12 col-md-6">
-                    <table class="table overflow="hidden">
-                        <tbody>
-                        <tr>
-                            <th scope="row">Release Date:</th>
-                            <td>${validChecker(data.releaseDate)}</td>
-                        </tr>
-                        </tbody>
-                    </table>
-                    <h4 class="text-center">Others Features</h4>
+                    <h4 class="tm-color">Others Features</h4>
                     <table class="table">
                         <tbody>                       
                             <tr>
@@ -136,19 +130,22 @@ const loadDetailsData = (data) =>{
                                 <td>${validChecker(data?.others?.WLAN)}</td>
                             </tr>
                     </table>
+                    <h4 class="tm-color">More Info:</h4>
+                    <table class="table>
+                        <tbody>
+                        <tr>
+                            <th scope="row">Release Date:</th>
+                            <td>${validChecker(data.releaseDate)}</td>
+                        </tr>
+                        </tbody>
+                    </table>
                 </div>
             </div>                    
         </div>   
     `;
-    // reset scroll after data load
-    // need fix
-    // window.scrollTo(0, 0);
-    // console.log(data.others)
-    // const specData = data?.others;
    
 
     detailSection.appendChild(fullSpec);
-
     // console.log(detailSection)
 }
 
@@ -162,6 +159,7 @@ const displayPhone = allPhone =>{
         const searchError = document.getElementById('search-error');
         searchError.innerHTML = `
             <h4>Result Not Found</h4>
+            <p>Search Again</p>
         `;
         
         dataToggler('none')
@@ -183,7 +181,7 @@ const displayPhone = allPhone =>{
                 <h5 class="card-title text-center">${singleData.phone_name}</h5>
                 <p class="card-text text-center">Brand: ${singleData.brand}</p>
                 <div class="d-flex justify-content-center">
-                    <button onclick="fetchDetail('${singleData.slug}')" class="btn tm-bg text-white">Show Details</button>
+                    <a href="#details" onclick="fetchDetail('${singleData.slug}')" class="btn tm-bg text-white">Show Details</a>
                 </div>
             </div>
         </div>
