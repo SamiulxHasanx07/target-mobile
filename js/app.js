@@ -155,6 +155,11 @@ const displayPhone = allPhone =>{
         loadButtonVisiblity('invisible');
         dataToggler('none');
     }
+    if(allPhone.length<20){
+        loadButtonVisiblity('invisible');
+    }else{
+        loadButtonVisiblity('visible');
+    }
     
     const displayPhone = document.getElementById('display-phone');
     displayPhone.textContent = '';
